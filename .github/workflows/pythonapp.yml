@@ -41,7 +41,7 @@ jobs:
     - name: Build with cov-build
       run: |
           export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
-          cov-build --dir coverity gcc app.cpp 
+          cov-build --dir coverity gcc hello.cpp 
     - name: Test with unittest module
       run: |
         python testcalc.py
