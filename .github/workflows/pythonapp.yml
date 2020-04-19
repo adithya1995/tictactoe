@@ -24,6 +24,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         sudo apt install build-essential
+        ls
     - name: Download Coverity Build Tool
       run: |
           wget https://scan.coverity.com/download/linux64 --post-data "token=b3lk_nYKE3JXiV6Nv6qs8A&project=adithya1995%2Ftictactoe" -O cov-analysis-linux64.tar.gz
@@ -36,11 +37,11 @@ jobs:
     - name: Configure
       run: |
           export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
-          cov-configure --compiler /usr/bin/gcc --comptype gcc
+          cov-configure --python 
     - name: Build with cov-build
       run: |
           export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
-          cov-build --dir cov-int make
+          cov-build --dir <IDIR> --fs-capture-search <path_to_root_of_python_project> --no-command 
     - name: Test with unittest module
       run: |
         python testcalc.py
