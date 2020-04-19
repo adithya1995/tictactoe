@@ -32,8 +32,6 @@ jobs:
       run: |
           chmod go-w $HOME
           sudo chmod -R go-w /usr/share
-    - name: Run autoconf
-      run: autoconf
     - name: Configure
       run: ./configure
     - name: Build with cov-build
