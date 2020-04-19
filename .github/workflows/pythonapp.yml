@@ -37,11 +37,11 @@ jobs:
     - name: Configure
       run: |
           export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
-          cov-configure --python 
+          cov-configure --compiler /usr/bin/gcc --comptype gcc
     - name: Build with cov-build
       run: |
           export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
-          cov-build --dir <IDIR> --fs-capture-search <path_to_root_of_python_project> --no-command 
+          cov-build --dir coverity gcc app.cpp 
     - name: Test with unittest module
       run: |
         python testcalc.py
