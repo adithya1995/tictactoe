@@ -41,12 +41,12 @@ jobs:
           export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
           cov-configure --compiler /usr/bin/gcc --comptype gcc
           cov-configure --python
-    - name: Build with cov-build
+    - name: Build with cov-build for Python & C++
       run: |
           export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
           cov-build --dir coverity gcc hello.cpp 
           cov-build --append-log --dir coverity --fs-capture-search ./ --no-command 
-    - name: Analyze with Coverity
+    - name: Analyze with Coverity 
       env:
         SUPER_SECRET: ${{ secrets.COVERITY_SCAN_TOKEN }}
       run: 
