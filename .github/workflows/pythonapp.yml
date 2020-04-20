@@ -45,12 +45,14 @@ jobs:
       run: |
           export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
           cov-build --dir coverity gcc hello.cpp 
-          #cov-build --append-log --dir coverity --fs-capture-search ./ --no-command 
+          cov-build --append-log --dir coverity --fs-capture-search ./ --no-command 
     - name: Analyze with Coverity
+      env:
+        SUPER_SECRET: ${{ secrets.COVERITY_SCAN_TOKEN }}
       run: 
           tar czvf cov.tgz coverity
           curl \
-          --form token=b3lk_nYKE3JXiV6Nv6qs8A \
+          --form token=$SUPER_SECRET \
           --form email=adithya95dk@gmail.com \
           --form file=@cov.tgz \
           --form version="1.0" \
