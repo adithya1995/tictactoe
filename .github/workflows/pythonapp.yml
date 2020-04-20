@@ -43,7 +43,7 @@ jobs:
       run: |
           export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
           cov-build --dir coverity gcc hello.cpp 
-          cov-build --append-log --dir coverity --fs-capture-search 'pwd' --no-command 
+          cov-build --append-log --dir coverity --fs-capture-search $PWD --no-command 
     - name: Analyze with Coverity
       run: 
           tar czvf cov.tgz coverity
