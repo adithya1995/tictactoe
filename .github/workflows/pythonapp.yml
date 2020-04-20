@@ -34,16 +34,18 @@ jobs:
       run: |
           chmod go-w $HOME
           sudo chmod -R go-w /usr/share
-    - name: Configure
+    - name: Configure with gcc and Python
       run: |
           export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
           cov-configure --compiler /usr/bin/gcc --comptype gcc
+          cov-configure --python
     - name: Build with cov-build
       run: |
           export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
           cov-build --dir coverity gcc hello.cpp 
+          cov-build --append-log --dir coverity --fs-capture-search 'pwd' --no-command 
     - name: Analyze with Coverity
-      run: |
+      run: 
           tar czvf cov.tgz coverity
           curl \
           --form token=b3lk_nYKE3JXiV6Nv6qs8A \
