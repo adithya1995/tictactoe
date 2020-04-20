@@ -52,7 +52,7 @@ jobs:
           --form email=adithya95dk@gmail.com \
           --form file=@cov.tgz \
           --form version="1.0" \
-          --form description="Description" \
+          --form description="Build submitted via Github Actions" \
           https://scan.coverity.com/builds?project=adithya1995%2Ftictactoe
     - name: Test with unittest module
       run: |
