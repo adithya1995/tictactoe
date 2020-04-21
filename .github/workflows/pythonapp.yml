@@ -51,13 +51,13 @@ jobs:
         SUPER_SECRET: ${{ secrets.COVERITY_SCAN_TOKEN }}
       run:
           tar caf cov.lzma coverity
-          curl \
-          --form token=$SUPER_SECRET \
-          --form email=adithya95dk@gmail.com \
-          --form file=@cov.lzma \
-          --form version="1.0" \
-          --form description="Build submitted via Github Actions" \
-          https://scan.coverity.com/builds?project=adithya1995%2Ftictactoe
+#           curl \
+#           --form token=$SUPER_SECRET \
+#           --form email=adithya95dk@gmail.com \
+#           --form file=@cov.lzma \
+#           --form version="1.0" \
+#           --form description="Build submitted via Github Actions" \
+#           https://scan.coverity.com/builds?project=adithya1995%2Ftictactoe
     - name: Test with unittest module
       run: |
         python testcalc.py
