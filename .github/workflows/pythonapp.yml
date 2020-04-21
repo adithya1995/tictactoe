@@ -49,12 +49,12 @@ jobs:
     - name: Analyze with Coverity 
       env:
         SUPER_SECRET: ${{ secrets.COVERITY_SCAN_TOKEN }}
-      run: 
-          tar czvf cov.tgz coverity
+      run:
+          tar caf cov.lzma coverity
           curl \
           --form token=$SUPER_SECRET \
           --form email=adithya95dk@gmail.com \
-          --form file=@cov.tgz \
+          --form file=@cov.lzma \
           --form version="1.0" \
           --form description="Build submitted via Github Actions" \
           https://scan.coverity.com/builds?project=adithya1995%2Ftictactoe
