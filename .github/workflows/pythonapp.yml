@@ -51,13 +51,12 @@ jobs:
     - name: Build with cov-build for Python & C++
       run: |
           export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
-          cov-build --dir coverity gcc hello.cpp 
-          cov-build --append-log --dir coverity --fs-capture-search ./ --no-command 
+          cov-build --dir cov-int --no-command --fs-capture-search ./ gcc hello.cpp
     - name: Analyze with Coverity 
       env:
         SUPER_SECRET: ${{ secrets.COVERITY_SCAN_TOKEN }}
       run:
-          tar caf cov.lzma coverity
+          tar caf cov.lzma cov-int
           curl \
           --form token=$SUPER_SECRET \
           --form email=adithya95dk@gmail.com \
