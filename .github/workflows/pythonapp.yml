@@ -57,7 +57,7 @@ jobs:
         SUPER_SECRET: ${{ secrets.COVERITY_SCAN_TOKEN }}
       run: |
           tar czvf cov.tgz cov-int
-          curl --form token=b3lk_nYKE3JXiV6Nv6qs8A \
+          curl --form token=$SUPER_SECRET \
             --form email=adithya95dk@gmail.com \
             --form file=@cov.tgz \
             --form version="2.0" \
