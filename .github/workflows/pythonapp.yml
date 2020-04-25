@@ -32,31 +32,31 @@ jobs:
 #     - name: Upload to CoPilot
 #       if: github.event_name == 'push' || github.event_name == 'pull_request'
 #       run: bash <(curl -s https://copilot-test.blackducksoftware.com/ci/githubactions/scripts/upload)
-#     - name: Download Coverity Build Tool
-#       env:
-#         SUPER_SECRET: ${{ secrets.COVERITY_SCAN_TOKEN }}
-#       run: |
-#           wget https://scan.coverity.com/download/linux64 --post-data "token=$SUPER_SECRET&project=adithya1995%2Ftictactoe" -O cov-analysis-linux64.tar.gz
-#           mkdir cov-analysis-linux64
-#           tar xzf cov-analysis-linux64.tar.gz --strip 1 -C cov-analysis-linux64
+    - name: Download Coverity Build Tool
+      env:
+        SUPER_SECRET: ${{ secrets.COVERITY_SCAN_TOKEN }}
+      run: |
+          wget https://scan.coverity.com/download/linux64 --post-data "token=$SUPER_SECRET&project=adithya1995%2Ftictactoe" -O cov-analysis-linux64.tar.gz
+          mkdir cov-analysis-linux64
+          tar xzf cov-analysis-linux64.tar.gz --strip 1 -C cov-analysis-linux64
     - name: Fixed world writable dirs
       run: |
           chmod go-w $HOME
           sudo chmod -R go-w /usr/share
-#     - name: Configure with gcc and Python
-#       run: |
-#           export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
-#           cov-configure --compiler /usr/bin/gcc --comptype gcc
-#           cov-configure --python
-#     - name: Build with cov-build for Python & C++
-#       run: |
-#           export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
-#           cov-build --dir cov-int --no-command --fs-capture-search ./ gcc hello.cpp
+    - name: Configure with gcc and Python
+      run: |
+          export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
+          cov-configure --compiler /usr/bin/gcc --comptype gcc
+          cov-configure --python
+    - name: Build with cov-build for Python & C++
+      run: |
+          export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
+          cov-build --dir cov-int --no-command --fs-capture-search ./ gcc hello.cpp
     - name: Analyze with Coverity 
       env:
         SUPER_SECRET: ${{ secrets.COVERITY_SCAN_TOKEN }}
       run: |
-          tar -czvf cov.tgz cov-int
+          tar czvf cov.tgz cov-int
           curl --form token=b3lk_nYKE3JXiV6Nv6qs8A \
             --form email=adithya95dk@gmail.com \
             --form file=@cov.tgz \
