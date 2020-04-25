@@ -39,10 +39,11 @@ jobs:
           wget https://scan.coverity.com/download/linux64 --post-data "token=$SUPER_SECRET&project=adithya1995%2Ftictactoe" -O cov-analysis-linux64.tar.gz
           mkdir cov-analysis-linux64
           tar xzf cov-analysis-linux64.tar.gz --strip 1 -C cov-analysis-linux64
-    - name: Fixed world writable dirs
+    - name: Fixed world writable dirs and install curl
       run: |
           chmod go-w $HOME
           sudo chmod -R go-w /usr/share
+          sudo apt install curl
     - name: Configure with gcc and Python
       run: |
           export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
