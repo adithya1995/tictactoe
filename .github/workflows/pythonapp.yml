@@ -55,8 +55,7 @@ jobs:
     - name: Analyze with Coverity 
       env:
         SUPER_SECRET: ${{ secrets.COVERITY_SCAN_TOKEN }}
-      run:
-          mkdir cov-int
+      run: |
           tar -czvf cov.tgz cov-int
           curl --form token=b3lk_nYKE3JXiV6Nv6qs8A \
             --form email=adithya95dk@gmail.com \
