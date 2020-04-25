@@ -56,7 +56,9 @@ jobs:
       env:
         SUPER_SECRET: ${{ secrets.COVERITY_SCAN_TOKEN }}
       run:
+          ls 
           tar caf cov.lzma cov-int
+          ls -al
           curl \
           --form token=$SUPER_SECRET \
           --form email=adithya95dk@gmail.com \
