@@ -43,7 +43,6 @@ jobs:
       run: |
           chmod go-w $HOME
           sudo chmod -R go-w /usr/share
-          sudo apt install curl
     - name: Configure with gcc and Python
       run: |
           export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
@@ -52,20 +51,18 @@ jobs:
     - name: Build with cov-build for Python & C++
       run: |
           export PATH=`pwd`/cov-analysis-linux64/bin:$PATH
-          #cov-build --dir cov-int --no-command --fs-capture-search ./ gcc hello.cpp
-          cov-build --dir cov-int gcc hello.cpp
+          cov-build --dir cov-int --no-command --fs-capture-search ./ gcc hello.cpp
     - name: Analyze with Coverity 
       env:
         SUPER_SECRET: ${{ secrets.COVERITY_SCAN_TOKEN }}
       run:
           tar caf cov.lzma cov-int
-          curl \
-          --form token=$SUPER_SECRET \
-          --form email=adithya95dk@gmail.com \
-          --form file=@cov.lzma \
-          --form version="1.0" \
-          --form description="Build submitted via Github Actions" \
-          https://scan.coverity.com/builds?project=adithya1995%2Ftictactoe
+          curl --form token=$SUPER_SECRET \
+            --form email=adithya95dk@gmail.com \
+            --form file=@cov.lzma \
+            --form version="Version" \
+            --form description="Description" \
+            https://scan.coverity.com/builds?project=adithya1995%2Ftictactoe
     - name: Test with unittest module
       run: |
         python testcalc.py
