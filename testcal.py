@@ -11,6 +11,9 @@ class TestCalc(unittest.TestCase):
 
     def test_random(self):
         self.assertFalse(False)
+        
+    def test_true(self):
+        self.assertTrue(False)
 
 if __name__ == '__main__':
     unittest.main()
